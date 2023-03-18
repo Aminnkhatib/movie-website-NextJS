@@ -1,0 +1,27 @@
+.card {
+  display: block;
+  gap: 12px;
+
+  &:hover {
+    filter: brightness(80%);
+    transition: 0.15s;
+  }
+}
+
+.cardCaption {
+  display: flex;
+  position: absolute;
+  background-color: #283548;
+  padding: 8px;
+  width: 100%;
+  bottom: 0;
+  align-items: baseline;
+}
+
+.cardImage {
+  position: relative;
+  height: 382px;
+  width: 680px;
+  border-radius: 8px;
+  overflow: hidden;
+}

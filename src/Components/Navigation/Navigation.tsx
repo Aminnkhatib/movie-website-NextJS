@@ -1,20 +1,14 @@
 import React from "react";
-import styles from "./Navigation.module.scss";
+import styles from "./navigation.module.scss";
 
-function Navigation() {
+function Navigation(): JSX.Element {
   return (
     <ul className={styles.Navigation}>
       <li>
         <a href="">Home</a>
       </li>
       <li>
-        <a href="">Projects</a>
-      </li>
-      <li>
-        <a href="">Skills</a>
-      </li>
-      <li>
-        <a href="">Contact</a>
+        <a href="">Discover</a>
       </li>
     </ul>
   );
