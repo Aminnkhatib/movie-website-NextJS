@@ -1,0 +1,14 @@
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+hr {
+  height: 1px;
+  width: 20px;
+  border: 0;
+  border-top: 50px solid whitesmoke;
+  background-color: black;
+  flex-grow: 1;
+}

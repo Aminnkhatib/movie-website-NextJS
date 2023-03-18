@@ -1,0 +1,30 @@
+@import "./../Utils.module.scss";
+
+.Navigation {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 16px;
+  background-color: $background-color;
+  color: white;
+  margin: 24px 72px 0 0;
+}
+
+li {
+  float: right;
+  padding: 5px;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 16px;
+}
+
+li a:hover {
+  background-color: $hover-color;
+}
