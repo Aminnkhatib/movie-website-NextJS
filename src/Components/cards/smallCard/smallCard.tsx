@@ -1,11 +1,17 @@
 import styles from "./smallCard.module.scss";
 
-function smallCard({ cardCaption }: { cardCaption: string }): JSX.Element {
+function smallCard({
+  cardCaption,
+  src,
+}: {
+  cardCaption: string;
+  src: string;
+}): JSX.Element {
   return (
     <div className={styles.card}>
       <div
         className={styles.cardImage}
-        style={{ backgroundImage: `url(${process.env.PUBLIC_URL})` }}
+        style={{ backgroundImage: `url(${src})` }}
       >
         <div className={styles.cardCaption}>{cardCaption}</div>
       </div>
