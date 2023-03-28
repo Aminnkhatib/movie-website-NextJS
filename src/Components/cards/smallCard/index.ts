@@ -1,3 +1,3 @@
-import smallCard from "./smallCard";
+import SmallCard from "./smallCard";
 
-export default smallCard;
+export default SmallCard;
