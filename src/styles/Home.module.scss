@@ -1,7 +1,15 @@
-.trending {
+.trendingBigCards {
   display: flex;
   flex-direction: row;
   gap: 24px;
   justify-content: center;
   align-items: center;
+}
+
+.generalSmallCard {
+  margin-left: 24px;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  gap: 24px;
 }
