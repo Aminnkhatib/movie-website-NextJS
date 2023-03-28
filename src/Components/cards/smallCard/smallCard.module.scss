@@ -8,20 +8,12 @@
   }
 }
 
-.cardCaption {
-  display: flex;
-  position: absolute;
-  background-color: #283548;
-  padding: 8px;
-  width: 100%;
-  bottom: 0;
-  align-items: baseline;
-}
-
 .cardImage {
   position: relative;
-  height: 250px;
-  width: 400px;
   border-radius: 8px;
+  height: 400px;
+  width: 270px;
   overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
