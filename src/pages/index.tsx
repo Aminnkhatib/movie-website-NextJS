@@ -51,15 +51,29 @@ export const getServerSideProps = async () => {
     },
   };
 };
+
+type HomeProps = {
+  trending: MovieData[];
+  topRated: MovieData[];
+  nowPlaying: MovieData[];
+};
+
+export default function Home({ trending, topRated, nowPlaying }: HomeProps) {
   // experiment i första sidan ta bort när du är klar
-  const [state, setState] = useState();
 
-  useEffect(() => {
-    (async () => {
-      const data = await fetch("/api/hello").then((data) => data.json());
-      setState(data);
-    })();
-  }, []);
-
-  return <div>{state && JSON.stringify(state)}</div>;
+  return (
+    <div>
+      <div className={styles.trending}>
+        {trending.map((data) => (
+          <BigCard
+            key={data.id}
+            // database missing title in some movies
+            cardTitle={data.title || data.name}
+            cardUnderTitle={data.release_date}
+            src={data.poster_path}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
