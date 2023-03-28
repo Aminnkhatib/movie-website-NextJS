@@ -1,10 +1,12 @@
 import styles from "./bigCard.module.scss";
 
 function bigCard({
-  cardCaption,
+  cardTitle,
+  cardUnderTitle,
   src,
 }: {
-  cardCaption: string;
+  cardTitle: string;
+  cardUnderTitle: string;
   src: string | null;
 }): JSX.Element {
   return (
@@ -15,7 +17,10 @@ function bigCard({
           backgroundImage: `url(https://image.tmdb.org/t/p/w500${src})`,
         }}
       >
-        <div className={styles.cardCaption}>{cardCaption}</div>
+        <div className={styles.cardTitle}>
+          {cardTitle}
+          <div className={styles.cardUnderTitle}>{cardUnderTitle}</div>
+        </div>
       </div>
     </div>
   );
