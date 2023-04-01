@@ -1,9 +1,27 @@
 .card {
   display: block;
+  position: relative;
   gap: 12px;
+}
 
-  &:hover {
-    filter: brightness(80%);
+.cardTitle {
+  display: none;
+  position: absolute;
+  font-family: "Inter";
+  font-weight: 700;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  color-scheme: normal;
+}
+
+.card:hover {
+  transition: 0.5s ease;
+  opacity: 0.5;
+
+  .cardTitle {
+    display: block;
     transition: 0.15s;
   }
 }
