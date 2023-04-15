@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import styles from "./navigation.module.scss";
 
@@ -5,10 +6,10 @@ function Navigation(): JSX.Element {
   return (
     <ul className={styles.Navigation}>
       <li className={styles.listItem}>
-        <a href="">Home</a>
+        <Link href="/">Home</Link>
       </li>
       <li className={styles.listItem}>
-        <a href="">Discover</a>
+        <Link href="/discoverPage">Discover</Link>
       </li>
     </ul>
   );
