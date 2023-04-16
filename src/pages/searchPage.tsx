@@ -1,35 +1,64 @@
 import { useEffect, useState } from "react";
-import { debounce } from "debounce";
-import Layout from "@/components/layout";
+import styles from "@/styles/discover.module.scss";
 import SmallCard from "@/components/cards/smallCard";
-import Navigation from "@/components/navigation";
-import Search from "@/components/search";
+import useSearch from "@/hooks/useSearch";
 
 export default function SearchPage() {
-  const [inputValue, setInputValue] = useState("");
   const [data, setData] = useState<Array<any> | null>(null);
+  const { search, setSearch } = useSearch();
+
+  type MovieData = {
+    name: string;
+    poster_path: string | null;
+    adult: boolean;
+    overview: string;
+    release_date: string;
+    genre_ids: number[];
+    id: number;
+    original_title: string;
+    original_language: string;
+    title: string;
+    backdrop_path: string | null;
+    popularity: number;
+    vote_count: number;
+    video: boolean;
+    vote_average: number;
+  };
+
+  const handleSearch = () => {
+    fetch(
+      `/api/search?` +
+        new URLSearchParams({
+          inputValue: search,
+        })
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data.results);
+        console.log(data);
+      });
+  };
+
+  let timeOut: ReturnType<typeof setTimeout> | null = null;
 
   useEffect(() => {
-    debounce(
-      () =>
-        fetch(
-          `https://api.themoviedb.org/3/search/movie?api_key=${process.env.key}&language=en-US&query=${inputValue}&page=1&include_adult=false`
-        )
-          .then((res) => res.json())
-          .then((data) => setData(data)),
-      300
-    );
-    console.log(data);
-  }, [data, inputValue]);
+    if (timeOut) {
+      clearTimeout(timeOut);
+    }
+    timeOut = setTimeout(handleSearch, 600);
+  }, [search]);
 
   return (
-    <div>
-      <Navigation />
-      <Search input={inputValue} />
-      <>
-        {data &&
-          data?.map((data) => <SmallCard key={""} cardCaption={""} src={""} />)}
-      </>
+    <div className={styles.generalSmallCard}>
+      {data &&
+        data?.map((data) => (
+          <SmallCard
+            key={data.id}
+            src={data.poster_path}
+            cardTitle={data.title}
+            cardUnderTitle={data.release_date}
+          />
+        ))}
     </div>
   );
 }
