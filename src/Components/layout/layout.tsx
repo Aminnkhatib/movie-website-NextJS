@@ -1,9 +1,8 @@
-import { Chau_Philomene_One } from "next/font/google";
 import Navigation from "../navigation";
 import Search from "../search";
 import styles from "./layout.module.scss";
 
-function Layout({ children }: { children: JSX.Element }) {
+function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className={styles.layout}>
       <Navigation />
