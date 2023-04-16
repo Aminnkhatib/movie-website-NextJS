@@ -1,7 +1,7 @@
 import SmallCard from "@/components/cards/smallCard";
 import Title from "@/components/title";
 import ToggleButton from "@/components/toggleButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "@/styles/discover.module.scss";
 
 type MovieData = {
@@ -23,7 +23,7 @@ type MovieData = {
 };
 
 type Genre = {
-  id: number;
+  id: string;
   name: string;
 };
 
@@ -45,28 +45,50 @@ type discoverData = {
 };
 
 export default function DiscoverPage({ discover, genres }: discoverData) {
-  const [selectedGenre, setSelectedGenre] = useState<string[]>([]);
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [toggle, setToggle] = useState(false);
+  const [movies, setMovies] = useState(discover);
+
+  const handleSelectedGenreChange = async () => {
+    const allGenres = selectedGenres.join(",");
+    const filteredMovies = await fetch(
+      "/api/discover?" +
+        new URLSearchParams({
+          genres: allGenres || "",
+        })
+    ).then((data) => data.json());
+    setMovies(filteredMovies.results);
+  };
+
+  useEffect(() => {
+    if (selectedGenres.length === 0) {
+      return;
+    }
+    handleSelectedGenreChange();
+  }, [genres, selectedGenres]);
+
   return (
     <div>
       <Title titleText="Discover" />
 
       {genres.map((data) => (
         <ToggleButton
-          genreName={data.name}
           key={data.id}
-          toggle={() => {
-            setToggle(!toggle);
-            setSelectedGenre((prevSelectedGenre) => [
-              ...prevSelectedGenre,
-              data.name,
-            ]);
-          }}
+          toggle={() =>
+            setSelectedGenres((prev) => {
+              if (prev.includes(data.id)) {
+                return prev.filter((genre) => !(genre === data.id));
+              } else {
+                return [...prev, data.id];
+              }
+            })
+          }
+          genreName={data.name}
         />
       ))}
 
       <div className={styles.generalSmallCard}>
-        {discover.map((data) => (
+        {movies.map((data) => (
           <SmallCard
             key={data.id}
             src={data.poster_path}
