@@ -78,14 +78,24 @@ export default function Home({ trending, topRated, nowPlaying }: HomeProps) {
       <Title titleText="Now Playing" />
       <div className={styles.generalSmallCard}>
         {nowPlaying.map((data) => (
-          <SmallCard key={data.id} src={data.poster_path} />
+          <SmallCard
+            key={data.id}
+            src={data.poster_path}
+            cardTitle={data.title || data.name}
+            cardUnderTitle={data.release_date}
+          />
         ))}
       </div>
 
       <Title titleText="Top Rated" />
       <div className={styles.generalSmallCard}>
         {topRated.map((data) => (
-          <SmallCard key={data.id} src={data.poster_path} />
+          <SmallCard
+            key={data.id}
+            src={data.poster_path}
+            cardTitle={data.title || data.name}
+            cardUnderTitle={data.release_date}
+          />
         ))}
       </div>
     </div>
