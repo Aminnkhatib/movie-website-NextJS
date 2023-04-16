@@ -12,8 +12,9 @@ function ToggleButton({
   const [isButtonOn, setIsButtonOn] = useState(false);
 
   const handleClick = () => {
+    console.log("test");
     setIsButtonOn(!isButtonOn);
-    toggle;
+    toggle();
   };
 
   return (
@@ -21,7 +22,7 @@ function ToggleButton({
       className={classNames("toggle-Button", {
         "toggle-Button-Active": isButtonOn,
       })}
-      onChange={handleClick}
+      onClick={() => handleClick()}
     >
       {genreName}
     </button>
