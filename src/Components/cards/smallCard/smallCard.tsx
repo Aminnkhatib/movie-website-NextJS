@@ -1,4 +1,5 @@
 import styles from "./smallCard.module.scss";
+import Image from 'next/image'
 
 function SmallCard({
   src,
@@ -11,12 +12,8 @@ function SmallCard({
 }): JSX.Element {
   return (
     <div className={styles.card}>
-      <div
-        className={styles.cardImage}
-        style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/w500${src})`,
-        }}
-      />
+      <div className={styles.cardImage}/>
+      <Image src={`https://image.tmdb.org/t/p/w500${src}`} className={styles.imgContent} alt="img" fill/>
       <div className={styles.cardTitle}>
         {cardTitle}
         <div className={styles.cardUnderTitle}>{cardUnderTitle}</div>

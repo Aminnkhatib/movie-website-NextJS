@@ -1,4 +1,4 @@
-import Layout from "@/components/layout";
+import Layout from "@/Components/layout";
 import { LevelContext } from "@/context/search";
 import "@/styles/globals.scss";
 import "@fontsource/inter";

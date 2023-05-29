@@ -1,8 +1,13 @@
+
+
 .card {
   display: block;
   position: relative;
+  aspect-ratio: 1 / 1.5;
   gap: 12px;
+  width: 100%;
 }
+
 .cardTitle {
   opacity: 0;
   top: 0;
@@ -11,8 +16,15 @@
   font-weight: 700;
   color: white;
   color-scheme: normal;
-  width: 270px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
+}
+
+.imgContent {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .card:hover {

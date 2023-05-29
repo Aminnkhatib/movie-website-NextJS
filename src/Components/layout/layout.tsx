@@ -1,4 +1,4 @@
-import Navigation from "../navigation";
+import Navigation from "../Navigation";
 import Search from "../search";
 import styles from "./layout.module.scss";
 

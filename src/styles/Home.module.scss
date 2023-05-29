@@ -1,16 +1,29 @@
+
+
 .trendingBigCards {
   display: flex;
   flex-direction: row;
   gap: 24px;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.generalSmallCard {
-  margin-left: 24px;
-  display: flex;
-  flex-direction: row;
-  overflow-x: scroll;
+
+
+@media (max-width: 800) {
+  .trendingBigCards {
+    flex-direction: column;
+  }
+}
+
+
+.smallCardContainer {
+  padding: 0px 20px;
+  overflow-x: hidden;
   overflow-y: hidden;
   gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
 }

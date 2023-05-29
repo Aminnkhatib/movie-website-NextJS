@@ -1,4 +1,5 @@
 import styles from "./bigCard.module.scss";
+import Image from 'next/image'
 
 function bigCard({
   cardTitle,
@@ -11,17 +12,11 @@ function bigCard({
 }): JSX.Element {
   return (
     <div className={styles.card}>
-      <div
-        className={styles.cardImage}
-        style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/w500${src})`,
-        }}
-      >
+        <Image src={`https://image.tmdb.org/t/p/w1280${src}`} className={styles.imgContent} alt="img" fill/>
         <div className={styles.cardTitle}>
           {cardTitle}
           <div className={styles.cardUnderTitle}>{cardUnderTitle}</div>
         </div>
-      </div>
     </div>
   );
 }
