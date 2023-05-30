@@ -1,10 +1,8 @@
-import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.scss";
-import BigCard from "@/components/cards/bigCard";
-import Title from "@/components/title";
-import SmallCard from "@/components/cards/smallCard";
-
-const inter = Inter({ subsets: ["latin"] });
+import BigCard from "@/Components/cards/bigCard";
+import Title from "@/Components/title";
+import SmallCard from "@/Components/cards/smallCard";
+import { GetStaticProps } from "next";
 
 const trendingTypes = {};
 
@@ -28,7 +26,7 @@ type MovieData = {
   vote_average: number;
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const trending = fetch(
     `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.key}`
   ).then((data) => data.json());
@@ -46,9 +44,10 @@ export const getServerSideProps = async () => {
   return {
     props: {
       trending: response[0].results.slice(0, 2),
-      topRated: response[1].results.slice(0, 6),
-      nowPlaying: response[2].results.slice(0, 6),
+      topRated: response[1].results.slice(0, 5),
+      nowPlaying: response[2].results.slice(0, 5),
     },
+    revalidate: 10,
   };
 };
 
@@ -70,25 +69,29 @@ export default function Home({ trending, topRated, nowPlaying }: HomeProps) {
             key={data.id}
             // database missing title in some movies
             cardTitle={data.title || data.name}
-            cardUnderTitle={data.release_date}
+            cardUnderTitle={
+              data.release_date && data.release_date.split("-")[0]
+            }
             src={data.backdrop_path}
           />
         ))}
       </div>
       <Title titleText="Now Playing" />
-      <div className={styles.generalSmallCard}>
+      <div className={styles.smallCardContainer}>
         {nowPlaying.map((data) => (
           <SmallCard
             key={data.id}
             src={data.poster_path}
             cardTitle={data.title || data.name}
-            cardUnderTitle={data.release_date}
+            cardUnderTitle={
+              data.release_date && data.release_date.split("-")[0]
+            }
           />
         ))}
       </div>
 
       <Title titleText="Top Rated" />
-      <div className={styles.generalSmallCard}>
+      <div className={styles.smallCardContainer}>
         {topRated.map((data) => (
           <SmallCard
             key={data.id}

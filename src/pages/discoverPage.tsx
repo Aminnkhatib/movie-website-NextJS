@@ -1,8 +1,9 @@
-import SmallCard from "@/components/cards/smallCard";
-import Title from "@/components/title";
-import ToggleButton from "@/components/toggleButton";
+import SmallCard from "@/Components/cards/smallCard";
+import Title from "@/Components/title";
+import ToggleButton from "@/Components/toggleButton";
 import { useEffect, useState } from "react";
-import styles from "@/styles/discover.module.scss";
+import styles from "@/styles/Home.module.scss";
+import { GetStaticProps } from "next";
 
 type MovieData = {
   name: string;
@@ -27,7 +28,7 @@ type Genre = {
   name: string;
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const discover = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.key}&language=en-US&sort_by=popularity.desc`
   ).then((data) => data.json());
@@ -36,7 +37,10 @@ export const getServerSideProps = async () => {
     `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.key}&language=en-US`
   ).then((data) => data.json());
 
-  return { props: { discover: discover.results, genres: genres.genres } };
+  return {
+    props: { discover: discover.results, genres: genres.genres.slice(0, 8) },
+    revalidate: 10,
+  };
 };
 
 type discoverData = {
@@ -45,55 +49,47 @@ type discoverData = {
 };
 
 export default function DiscoverPage({ discover, genres }: discoverData) {
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [selectedGenre, setSelectedGenre] = useState("");
   const [toggle, setToggle] = useState(false);
   const [movies, setMovies] = useState(discover);
 
   const handleSelectedGenreChange = async () => {
-    const allGenres = selectedGenres.join(",");
     const filteredMovies = await fetch(
       "/api/discover?" +
         new URLSearchParams({
-          genres: allGenres || "",
+          genres: selectedGenre,
         })
     ).then((data) => data.json());
     setMovies(filteredMovies.results);
   };
 
   useEffect(() => {
-    if (selectedGenres.length === 0) {
-      return;
-    }
     handleSelectedGenreChange();
-  }, [genres, selectedGenres]);
+  }, [selectedGenre]);
 
   return (
     <div>
       <Title titleText="Discover" />
+      <div className={styles.genreList}>
+        {genres.map((data) => (
+          <ToggleButton
+            key={data.id}
+            toggleActive={() => setSelectedGenre(data.id)}
+            genreName={data.name}
+            active={selectedGenre == data.id}
+          />
+        ))}
+      </div>
 
-      {genres.map((data) => (
-        <ToggleButton
-          key={data.id}
-          toggle={() =>
-            setSelectedGenres((prev) => {
-              if (prev.includes(data.id)) {
-                return prev.filter((genre) => !(genre === data.id));
-              } else {
-                return [...prev, data.id];
-              }
-            })
-          }
-          genreName={data.name}
-        />
-      ))}
-
-      <div className={styles.generalSmallCard}>
+      <div className={styles.smallCardContainer}>
         {movies.map((data) => (
           <SmallCard
             key={data.id}
             src={data.poster_path}
             cardTitle={data.title || data.name}
-            cardUnderTitle={data.release_date}
+            cardUnderTitle={
+              data.release_date && data.release_date.split("-")[0]
+            }
           />
         ))}
       </div>
