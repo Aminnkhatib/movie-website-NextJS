@@ -1,9 +1,11 @@
+
 .container {
   display: flex;
   padding: 24px 0 0 24px;
 }
 
 .input {
+  font-family: var(--font-inter);
   width: 385px;
   height: 40px;
   border-radius: 24px;

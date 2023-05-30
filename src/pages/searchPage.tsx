@@ -1,29 +1,11 @@
 import { useEffect, useState } from "react";
-import styles from "@/styles/discover.module.scss";
-import SmallCard from "@/components/cards/smallCard";
+import styles from "@/styles/Home.module.scss";
+import SmallCard from "@/Components/cards/smallCard";
 import useSearch from "@/hooks/useSearch";
 
 export default function SearchPage() {
   const [data, setData] = useState<Array<any> | null>(null);
   const { search, setSearch } = useSearch();
-
-  type MovieData = {
-    name: string;
-    poster_path: string | null;
-    adult: boolean;
-    overview: string;
-    release_date: string;
-    genre_ids: number[];
-    id: number;
-    original_title: string;
-    original_language: string;
-    title: string;
-    backdrop_path: string | null;
-    popularity: number;
-    vote_count: number;
-    video: boolean;
-    vote_average: number;
-  };
 
   const handleSearch = () => {
     fetch(
@@ -49,7 +31,7 @@ export default function SearchPage() {
   }, [search]);
 
   return (
-    <div className={styles.generalSmallCard}>
+    <div className={styles.smallCardContainer}>
       {data &&
         data?.map((data) => (
           <SmallCard

@@ -9,11 +9,11 @@
 }
 
 .cardTitle {
+  font-family: var(--font-inter);
+  font-weight: 700;
   opacity: 0;
   top: 0;
   position: absolute;
-  font-family: "Inter";
-  font-weight: 700;
   color: white;
   color-scheme: normal;
   width: 100%;
