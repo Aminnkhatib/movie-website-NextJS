@@ -42,17 +42,26 @@ function Layout({
     <div className={classNames([styles.layout, className])}>
       <Navigation isMenuOpen={isMenuOpen} />
       <div className={styles.base}>
-        <MobileNavigationButton
-          isMenuOpen={isMenuOpen}
-          toggle={() => setIsMenuOpen(!isMenuOpen)}
-        />
+        <header className={styles.mobileHeader}>
+          <div className={styles.moviesTitle}>
+            <span>Movies</span>
+          </div>
+          <MobileNavigationButton
+            isMenuOpen={isMenuOpen}
+            toggle={() => setIsMenuOpen(!isMenuOpen)}
+          />
+        </header>
         <div
-          className={classNames({
+          className={classNames(styles["searchSectionContainer"], {
             [styles["baseMobileNavActive"]]: isMenuOpen,
           })}
         >
           <Search toggleSearch={() => setIsShowSearch(!isShowSearch)} />
           {isShowSearch ? <SearchSection /> : children}
+          <span className={styles.disclaimer}>
+            This product uses the TMDb API but is not endorsed or certified by
+            TMDb
+          </span>
         </div>
       </div>
     </div>

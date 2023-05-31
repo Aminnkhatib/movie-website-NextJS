@@ -7,6 +7,13 @@
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
+  position: relative;
+  padding-bottom: 40px;
+  min-height: 100%;
+}
+
+.searchSectionContainer {
+  height: 100%;
 }
 
 .baseMobileNavActive {
@@ -14,11 +21,35 @@
 }
 
 .mobileMenuButton {
-  display:flex;
+  padding-right: 20px;
   background-color: rgba($color: #000000, $alpha: 0);
   border: 0;
-  margin-left: auto;
-  margin-right: 20px;
-  margin-top: 22px;
-  align-items: flex-end;
+}
+
+.mobileHeader {
+  display: flex;
+  padding-top: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.moviesTitle{
+  display: none;
+  font-size: 24px;
+  font-weight: 600;
+  padding-left: 20px;
+}
+
+.disclaimer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #838383;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .moviesTitle {
+    display: flex;
+  }
 }

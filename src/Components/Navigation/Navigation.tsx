@@ -1,8 +1,7 @@
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./navigation.module.scss";
-import { useMediaQuery } from "@/hooks";
-import { useHover } from "@/hooks";
+import styles from "./Navigation.module.scss";
+import { useMediaQuery, useHover } from "@/hooks";
 import { useRouter } from "next/router";
 import { HomeIcon, DiscoverIcon } from "../Icons";
 
@@ -63,11 +62,16 @@ function Navigation({ isMenuOpen }: { isMenuOpen: boolean }): JSX.Element {
   return (
     <>
       {(isDesktop || isMenuOpen) && (
-        <ul className={styles.Navigation}>
-          {links.map((link) => (
-            <LinkItem key={link.label} link={link} />
-          ))}
-        </ul>
+        <div className={styles.Navigation}>
+          <div className={styles.title}>
+            <span>Movies</span>
+          </div>
+          <ul className={styles.list}>
+            {links.map((link) => (
+              <LinkItem key={link.label} link={link} />
+            ))}
+          </ul>
+        </div>
       )}
     </>
   );
