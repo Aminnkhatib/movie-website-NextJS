@@ -8,3 +8,17 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+.baseMobileNavActive {
+  filter: brightness(35%);
+}
+
+.mobileMenuButton {
+  display:flex;
+  background-color: rgba($color: #000000, $alpha: 0);
+  border: 0;
+  margin-left: auto;
+  margin-right: 20px;
+  margin-top: 22px;
+  align-items: flex-end;
+}

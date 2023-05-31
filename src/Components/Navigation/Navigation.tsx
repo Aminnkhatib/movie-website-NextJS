@@ -1,25 +1,75 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./navigation.module.scss";
-import { HomeIcon } from "../Icons/HomeIcon";
-import { DiscoverIcon } from "../Icons/DiscoverIcon";
+import { useMediaQuery } from "@/hooks";
+import { useHover } from "@/hooks";
+import { useRouter } from "next/router";
+import { HomeIcon, DiscoverIcon } from "../Icons";
 
-function Navigation(): JSX.Element {
+//used for hovering over svg and label
+function LinkItem({ link }: { link: any }) {
+  const ref = useRef(null);
+  const isHovered = useHover(ref);
+  const router = useRouter();
+  const isCurrent = router.pathname === link.href;
+
+  const [color, setColor] = useState(
+    isCurrent ? "white" : "rgba(131, 131, 131, 1)"
+  );
+
+  const Icon = link.icon;
+
+  useEffect(() => {
+    if (isCurrent) {
+      setColor("white");
+    } else {
+      setColor(isHovered ? "white" : "rgba(131, 131, 131, 1)");
+    }
+  }, [isHovered, router.pathname]);
+
   return (
-    <ul className={styles.Navigation}>
-      <li className={styles.listItem}>
-        <Link href="/">
-          <HomeIcon variant="active" />
-          Home
-        </Link>
-      </li>
-      <li className={styles.listItem}>
-        <Link href="/discoverPage">
-          <DiscoverIcon variant="active" />
-          Discover
-        </Link>
-      </li>
-    </ul>
+    <li key={link.label} className={styles.listItem}>
+      <Link ref={ref} href={link.href}>
+        <Icon fill={color} />
+        <span
+          style={{
+            color,
+          }}
+        >
+          {link.label}
+        </span>
+      </Link>
+    </li>
+  );
+}
+
+function Navigation({ isMenuOpen }: { isMenuOpen: boolean }): JSX.Element {
+  // second arg is default value, server doesn't know if user is desktop. hydration mismatch fix
+  const isDesktop = useMediaQuery("(min-width: 768px)", true);
+
+  const links = [
+    {
+      icon: HomeIcon,
+      href: "/",
+      label: "Home",
+    },
+    {
+      icon: DiscoverIcon,
+      href: "/discoverPage",
+      label: "Discover",
+    },
+  ];
+
+  return (
+    <>
+      {(isDesktop || isMenuOpen) && (
+        <ul className={styles.Navigation}>
+          {links.map((link) => (
+            <LinkItem key={link.label} link={link} />
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
 
