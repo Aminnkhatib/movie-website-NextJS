@@ -1,28 +1,21 @@
 import classNames from "classnames";
-import { useState } from "react";
 import styles from "./toggleButton.module.scss";
 
 function ToggleButton({
-  toggle,
+  toggleActive,
   genreName,
+  active,
 }: {
-  toggle: () => void;
+  active: boolean;
+  toggleActive: () => void;
   genreName: string;
 }) {
-  const [isButtonOn, setIsButtonOn] = useState(false);
-
-  const handleClick = () => {
-    console.log("test");
-    setIsButtonOn(!isButtonOn);
-    toggle();
-  };
-
   return (
     <button
-      className={classNames("toggle-Button", {
-        "toggle-Button-Active": isButtonOn,
+      className={classNames(styles["toggle-Button"], {
+        [styles["toggle-Button-Active"]]: active,
       })}
-      onClick={() => handleClick()}
+      onClick={toggleActive}
     >
       {genreName}
     </button>
