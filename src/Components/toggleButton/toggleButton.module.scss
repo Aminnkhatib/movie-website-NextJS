@@ -1,18 +1,17 @@
 
-.toggle-Button {
+.toggleButton {
   font-family: var(--font-inter);
   font-weight: 700;
+  font-size: 16px;
   width: 150px;
   height: 42px;
-  left: 468px;
-  top: 221px;
   border: 2px solid #ffffff;
   background-color: transparent;
   border-radius: 100px;
   cursor: pointer;
 }
 
-.toggle-Button-Active {
+.toggleButtonActive {
   background-color: #ffffff;
   color: black;
   cursor: pointer;
