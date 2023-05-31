@@ -30,7 +30,7 @@ type Genre = {
 
 export const getStaticProps: GetStaticProps = async () => {
   const discover = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.key}&language=en-US&sort_by=popularity.desc`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.key}&language=en-US&sort_by=popularity.desc&limit=8`
   ).then((data) => data.json());
 
   const genres = await fetch(
@@ -38,8 +38,10 @@ export const getStaticProps: GetStaticProps = async () => {
   ).then((data) => data.json());
 
   return {
-    props: { discover: discover.results, genres: genres.genres.slice(0, 8) },
-    revalidate: 10,
+    props: {
+      discover: discover.results.slice(0, 8),
+      genres: genres.genres.slice(0, 8),
+    },
   };
 };
 
@@ -50,7 +52,6 @@ type discoverData = {
 
 export default function DiscoverPage({ discover, genres }: discoverData) {
   const [selectedGenre, setSelectedGenre] = useState("");
-  const [toggle, setToggle] = useState(false);
   const [movies, setMovies] = useState(discover);
 
   const handleSelectedGenreChange = async () => {
@@ -60,11 +61,11 @@ export default function DiscoverPage({ discover, genres }: discoverData) {
           genres: selectedGenre,
         })
     ).then((data) => data.json());
-    setMovies(filteredMovies.results);
+    setMovies(filteredMovies.results.slice(0, 8));
   };
 
   useEffect(() => {
-    handleSelectedGenreChange();
+    if (selectedGenre !== "") handleSelectedGenreChange();
   }, [selectedGenre]);
 
   return (
