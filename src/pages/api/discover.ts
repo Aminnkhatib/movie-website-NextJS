@@ -26,5 +26,4 @@ export default async function handler(
   ).then((data) => data.json());
 
   res.status(200).json(discover);
-  console.log(genres);
 }

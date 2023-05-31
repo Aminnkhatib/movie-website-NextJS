@@ -1,7 +1,7 @@
 
 
 .card {
-  display: block;
+  display: flex;
   gap: 12px;
   position: relative;
   border-radius: 8px;
@@ -41,8 +41,9 @@
   font-weight: 400;
 }
 
-@media (max-width: 600px) {
-.cardTitle {
-  padding: 6px;
-}
+@media (max-width: 768px) {
+
+  .cardTitle {
+    display: none;
+  }
 }
