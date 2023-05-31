@@ -12,8 +12,8 @@ function ToggleButton({
 }) {
   return (
     <button
-      className={classNames(styles["toggle-Button"], {
-        [styles["toggle-Button-Active"]]: active,
+      className={classNames(styles["toggleButton"], {
+        [styles["toggleButtonActive"]]: active,
       })}
       onClick={toggleActive}
     >

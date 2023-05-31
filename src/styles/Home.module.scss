@@ -10,6 +10,10 @@
   width: 100%;
 }
 
+.searchSectionContainer {
+  height: 100%;
+}
+
 @media (max-width: 768px) {
   .trendingBigCards {
     flex-direction: column;
