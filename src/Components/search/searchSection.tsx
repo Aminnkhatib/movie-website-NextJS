@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "@/styles/Home.module.scss";
 import SmallCard from "@/Components/cards/smallCard";
-import useSearch from "@/hooks/useSearch";
+import { useSearch } from "@/hooks";
+import Title from "../title";
 
 export default function SearchPage() {
   const [data, setData] = useState<Array<any> | null>(null);
@@ -16,8 +17,7 @@ export default function SearchPage() {
     )
       .then((res) => res.json())
       .then((data) => {
-        setData(data.results);
-        console.log(data);
+        setData(data.results.slice(0, 6));
       });
   };
 
@@ -31,16 +31,19 @@ export default function SearchPage() {
   }, [search]);
 
   return (
-    <div className={styles.smallCardContainer}>
-      {data &&
-        data?.map((data) => (
-          <SmallCard
-            key={data.id}
-            src={data.poster_path}
-            cardTitle={data.title}
-            cardUnderTitle={data.release_date}
-          />
-        ))}
-    </div>
+    <>
+      <Title titleText="Search" />
+      <div className={styles.smallCardContainer}>
+        {data &&
+          data?.map((data) => (
+            <SmallCard
+              key={data.id}
+              src={data.poster_path}
+              cardTitle={data.title}
+              cardUnderTitle={data.release_date}
+            />
+          ))}
+      </div>
+    </>
   );
 }

@@ -1,8 +1,8 @@
-import useSearch from "@/hooks/useSearch";
 import { useRouter } from "next/router";
 import styles from "./search.module.scss";
+import { useSearch } from "@/hooks";
 
-function Search() {
+function Search({ toggleSearch }: { toggleSearch: () => void }) {
   const router = useRouter();
   const { search, setSearch } = useSearch();
   return (
@@ -12,8 +12,8 @@ function Search() {
         className={styles.input}
         placeholder="Search movie title"
         onChange={(e) => setSearch(e.target.value)}
-        onFocus={() => router.push("/searchPage")}
-        onBlur={() => router.push("/")}
+        onFocus={toggleSearch}
+        onBlur={toggleSearch}
       />
     </div>
   );
