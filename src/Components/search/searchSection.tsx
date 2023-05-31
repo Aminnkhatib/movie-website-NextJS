@@ -31,7 +31,7 @@ export default function SearchPage() {
   }, [search]);
 
   return (
-    <>
+    <div className={styles.searchSectionContainer}>
       <Title titleText="Search" />
       <div className={styles.smallCardContainer}>
         {data &&
@@ -44,6 +44,6 @@ export default function SearchPage() {
             />
           ))}
       </div>
-    </>
+    </div>
   );
 }

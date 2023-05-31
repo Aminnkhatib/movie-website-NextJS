@@ -9,15 +9,24 @@
 }
 
 .cardTitle {
+  display: flex;
   font-family: var(--font-inter);
   font-weight: 700;
   opacity: 0;
-  top: 0;
+  font-size: 32px;
   position: absolute;
   color: white;
-  color-scheme: normal;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+}
+
+.cardUnderTitle {
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .imgContent {
@@ -30,12 +39,8 @@
 .card:hover {
   .cardTitle {
     opacity: 1;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.8);
     transition: 0.15s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
   }
 }
 

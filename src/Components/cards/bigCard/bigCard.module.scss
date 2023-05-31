@@ -27,6 +27,7 @@
 .cardTitle {
   font-family: var(--font-inter);
   font-weight: 700;
+  font-size: 20px;
   display: block;
   position: absolute;
   font-weight: 500;
@@ -39,6 +40,7 @@
 
 .cardUnderTitle {
   font-weight: 400;
+  font-size: 16px;
 }
 
 @media (max-width: 768px) {
