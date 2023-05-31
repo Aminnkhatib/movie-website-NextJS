@@ -4,10 +4,6 @@ import Title from "@/Components/title";
 import SmallCard from "@/Components/cards/smallCard";
 import { GetStaticProps } from "next";
 
-const trendingTypes = {};
-
-const topRatedTypes = {};
-
 type MovieData = {
   name: string;
   poster_path: string | null;
@@ -58,8 +54,6 @@ type HomeProps = {
 };
 
 export default function Home({ trending, topRated, nowPlaying }: HomeProps) {
-  // experiment i första sidan ta bort när du är klar
-
   return (
     <div>
       <Title titleText="Trending" />

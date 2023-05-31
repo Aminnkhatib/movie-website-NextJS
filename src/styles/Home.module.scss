@@ -1,6 +1,7 @@
 
 
 .trendingBigCards {
+  padding: 0px 20px;
   display: flex;
   flex-direction: row;
   gap: 24px;
@@ -9,14 +10,18 @@
   width: 100%;
 }
 
-
-
-@media (max-width: 800) {
+@media (max-width: 768px) {
   .trendingBigCards {
     flex-direction: column;
   }
 }
 
+.genreList {
+  display: flex;
+  flex-wrap: wrap;
+  gap:8px;
+  margin: 26px 20px 48px 20px;
+}
 
 .smallCardContainer {
   padding: 0px 20px;
@@ -24,6 +29,12 @@
   overflow-y: hidden;
   gap: 24px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
   grid-gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .smallCardContainer {
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  }
 }
