@@ -8,22 +8,22 @@ export default function SearchPage() {
   const [data, setData] = useState<Array<any> | null>(null);
   const { search, setSearch } = useSearch();
 
-  const handleSearch = () => {
-    fetch(
-      `/api/search?` +
-        new URLSearchParams({
-          inputValue: search,
-        })
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data.results.slice(0, 6));
-      });
-  };
-
-  let timeOut: ReturnType<typeof setTimeout> | null = null;
-
   useEffect(() => {
+    const handleSearch = () => {
+      fetch(
+        `/api/search?` +
+          new URLSearchParams({
+            inputValue: search,
+          })
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setData(data.results.slice(0, 6));
+        });
+    };
+    // add timeout for fetch
+    let timeOut: ReturnType<typeof setTimeout> | null = null;
+
     if (timeOut) {
       clearTimeout(timeOut);
     }
