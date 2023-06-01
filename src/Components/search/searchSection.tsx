@@ -40,7 +40,9 @@ export default function SearchPage() {
               key={data.id}
               src={data.poster_path}
               cardTitle={data.title}
-              cardUnderTitle={data.release_date}
+              cardUnderTitle={
+                data.release_date && data.release_date.split("-")[0]
+              }
             />
           ))}
       </div>

@@ -58,10 +58,12 @@ function Layout({
         >
           <Search toggleSearch={() => setIsShowSearch(!isShowSearch)} />
           {isShowSearch ? <SearchSection /> : children}
-          <span className={styles.disclaimer}>
-            This product uses the TMDb API but is not endorsed or certified by
-            TMDb
-          </span>
+          <footer className={styles.footer}>
+            <span className={styles.disclaimer}>
+              This product uses the TMDb API but is not endorsed or certified by
+              TMDb
+            </span>
+          </footer>
         </div>
       </div>
     </div>
